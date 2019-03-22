@@ -76,7 +76,6 @@ class ProgramProvider extends React.Component {
   render() {
     const { children } = this.props;
     const { programs } = this.state;
-    console.log("programs", programs)
     return (
       <ProgramContext.Provider
         value={{

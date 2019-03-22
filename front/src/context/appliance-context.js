@@ -9,6 +9,8 @@ class ApplianceProvider extends React.Component {
     this.state = {
       plugs : [],
       stores : [],
+      plugActions: ["TURN ON", "TURN OFF"],
+      storeActions: ["GO UP", "GO DOWN"],
     }
     this.getAppliances();
   }
@@ -20,13 +22,14 @@ class ApplianceProvider extends React.Component {
 
   render() {
     const { children } = this.props;
-    const {plugs, stores} = this.state;
-    console.log("plugs", plugs)
+    const {plugs, stores, plugActions, storeActions} = this.state;
     return (
       <ApplianceContext.Provider
         value={{
           plugs,
           stores,
+          plugActions,
+          storeActions
         }}
       >
         {children}

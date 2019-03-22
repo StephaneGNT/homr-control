@@ -3,10 +3,10 @@ import { Redirect } from '@reach/router';
 
 import Layout from "../components/layout"
 import SEO from "../components/seo"
-import ProgramContext from "../context/programContext";
-import LoginContext from "../context/loginContext";
-import ApplianceContext from "../context/applianceContext";
-import ProgramList from "../components/programComponents/ProgramList";
+import ProgramContext from "../context/program-context";
+import LoginContext from "../context/login-context";
+import ApplianceContext from "../context/appliance-context";
+import ProgramList from "../components/programs-list";
 
 const ProgramPage = () => {
   return (

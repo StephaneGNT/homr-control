@@ -1,9 +1,9 @@
 const express = require('express')
 const router = express.Router()
-const Command = require('../models/commandModel')
+const Command = require('../models/command-model')
 
 router.get('/', function (req, res, next) {
-  Command.find({}).then((data, err) => {
+  Command.find().then((data, err) => {
     if (err) res.status(500).json({message: 'Erreur lors de la récupération des données'})
     else res.status(200).send(data)
   })

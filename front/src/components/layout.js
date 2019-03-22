@@ -3,7 +3,7 @@ import React from "react"
 import { StaticQuery, graphql } from "gatsby"
 
 import Header from './header';
-import NavBar from './NavBar';
+import NavBar from './nav-bar';
 import "./layout.css"
 
 const Layout = (props) => (

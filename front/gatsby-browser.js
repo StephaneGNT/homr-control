@@ -8,10 +8,10 @@
 
 import React from "react"
 
-import { ApplianceProvider } from './src/context/applianceContext';
-import { LoginProvider } from './src/context/loginContext';
-import { CommandProvider } from "./src/context/commandContext";
-import { ProgramProvider } from "./src/context/programContext";
+import { ApplianceProvider } from './src/context/appliance-context';
+import { LoginProvider } from './src/context/login-context';
+import { CommandProvider } from "./src/context/command-context";
+import { ProgramProvider } from "./src/context/program-context";
 
 export const wrapRootElement = ({ element }) => (
   <LoginProvider>

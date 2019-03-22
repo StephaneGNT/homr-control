@@ -5,7 +5,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 
-import Login from "../components/Login";
+import Login from "../components/login";
 
 const LoginPage = () => (
     <Layout>

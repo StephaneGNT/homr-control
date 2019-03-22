@@ -9,7 +9,6 @@ class LoginProvider extends React.Component {
   }
 
   checkCredentials = (id, password) => {
-    console.log("checkCredentials", id, password)
     // axios
     //   .post('/api/user', { id, password })
     //   .then(res => res.status === 200 && this.setState({ isLogged: true }))

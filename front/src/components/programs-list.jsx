@@ -1,18 +1,22 @@
 import React, {useState} from "react";
-import ConfirmationWindow from '../ConfirmationWindow';
+import ConfirmationWindow from './confirmation-window';
+import CreateOrModifyProgram from "./create-or-modify-program";
+
 import Fab from '@material-ui/core/Fab';
 import AddIcon from '@material-ui/icons/Add';
-import { goUp, goDown, turnOn, turnOff } from '../../functions/commandFunctions';
+
+// import { goUp, goDown, turnOn, turnOff } from '../../functions/commandFunctions';
 
 const ProgramList = (props) => {
   const [open, setOpen] = useState(false);
-  const [selectedProgram, setSelectedProgram] = useState();
+  const [visible, setVisible] = useState(false);
+  const [selectedProgram, setSelectedProgram] = useState({applianceName: '', order:''});
 
   const renderProgramList = (props) => {
     let render = [];
-    props.programs.map(program => {
+    props.programs.map((program, index) => {
       render.push(
-        <div className="orderForAppliance">
+        <div className="orderForAppliance" key={index}>
           <b>{program.name}</b>
           {renderProgram(program)}
           <Fab size="small">
@@ -37,25 +41,42 @@ const ProgramList = (props) => {
 
   const renderProgram = (program) => {
     let render =[];
-    program.commands.map(command => {
+    program.commands.map((command, index) => {
       render.push(
-        <p>{command.applianceName} - {command.order}</p>
+        <p key={index}>{command.applianceName} - {command.order}</p>
       )
     })
     return render;
   }
 
+  const createOrModifyStyle = {
+    display: visible ? 'block' : 'none'
+  }
+
+  const programListStyle = {
+    display: !visible ? 'block' : 'none'
+  }
+
   return (
     <div>
-      <ConfirmationWindow 
-        open
-        setOpen
+      <ConfirmationWindow
+        open={open}
+        setOpen={setOpen}
         selectedData={selectedProgram}
         delete={props.deleteProgram}
+        type="ce programme"
       />
-      <div className="text-center">
+      <div style={createOrModifyStyle}>
+        <CreateOrModifyProgram
+          appliances={props.appliances}
+          program={selectedProgram}
+          setVisible={setVisible}
+          save={props.saveProgram}
+        />
+      </div>
+      <div className="text-center" style={programListStyle}>
         {renderProgramList(props)}
-        <Fab size="small" color="primary" /*onClick={() => {setModalVisibility(true); setSelectedAppliance(appliance); setActionModifyOrCreate('SAVE')}}*/>
+        <Fab size="small" color="primary" onClick={() => setVisible(true)}>
           <AddIcon />
         </Fab>
       </div>

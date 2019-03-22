@@ -1,13 +1,13 @@
 import React, { useState } from "react";
-import LoginContext from '../context/loginContext';
+import LoginContext from '../context/login-context';
 
 const Login = () => {
-    const [id, setId] = useState(); 
+    const [id, setId] = useState();
     const [password, setPassword] = useState();
 
     return (
         <LoginContext.Consumer>{
-            value => 
+            value =>
                 <div style={{ display: 'flex', flexDirection: 'column' }}>
                 <input
                   placeholder="Login"

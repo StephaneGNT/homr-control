@@ -1,19 +1,15 @@
 import React from 'react';
-import TextField from '@material-ui/core/TextField';
-import Select from '@material-ui/core/Select';
-import InputLabel from '@material-ui/core/InputLabel';
-import Input from '@material-ui/core/Input';
-import MenuItem from '@material-ui/core/MenuItem';
-import FormControl from '@material-ui/core/FormControl';
+import { TextField, Select, MenuItem, InputLabel, Input, FormControl } from '@material-ui/core';
 
 const DayAndTimeSelection = (props) => {
+  console.log("props in DayAndTimeSelection", props)
   const formatDate = (dayNumber, time, props) => {
     let newTime = new Date();
     if (dayNumber) {
       if (dayNumber > newTime.getDay()) newTime.setDate(newTime.getDate()+(dayNumber - newTime.getDay()))
       else newTime.setDate(newTime.getDate()+(7 + (dayNumber - newTime.getDay())))
     }
-    if (time) { 
+    if (time) {
       let timeArray = time.split(":");
       newTime.setHours(timeArray[0]);
       newTime.setMinutes(timeArray[1]);
@@ -22,9 +18,12 @@ const DayAndTimeSelection = (props) => {
     props.setCommand({...props.command, [props.dateToDefine]: newTime});
   }
 
-  const getHoursAndMinutesFromDate = (date) => {
+  const getHoursAndMinutesFromDate = (dateInStringFormat) => {
+    // console.log("date", date)
+    // console.log("date format", typeof(date))
     let hoursAndMinutes = '';
-    if (date !== '' && date !== null) {
+    if (dateInStringFormat !== '') {
+      let date = new Date(dateInStringFormat);
       date.getHours() < 10 ? hoursAndMinutes += `0${date.getHours()}:` : hoursAndMinutes += `${date.getHours()}:`;
       date.getMinutes() < 10 ? hoursAndMinutes += `0${date.getMinutes()}` : hoursAndMinutes += `${date.getMinutes()}`;
     }
@@ -43,7 +42,7 @@ const DayAndTimeSelection = (props) => {
             InputLabelProps={{
               shrink: true,
             }}
-            onChange={e => {console.log(e.target.value); props.setCommand({...props.command, [props.dateToDefine]: e.target.value})}}
+            onChange={e => {console.log("command", props.command); console.log("e.target.value", e.target.value); console.log("props.dateToDefine", props.dateToDefine); props.setCommand({...props.command, [props.dateToDefine]: e.target.value})}}
           />
         </td>
       </tr>
@@ -52,9 +51,11 @@ const DayAndTimeSelection = (props) => {
 
   if(props.occurence === 'Every day' || props.occurence === 'Every day but WE') {
     return(
-      <tr>
-        <td>{props.dateToDefine === "startDate" ? <p>Début</p> : <p>Fin <br/><span style={{fontSize:'0.7em'}}>(optionnelle)</span></p>}</td>
-        <td colSpan="2" className="text-center">
+      <div className="row  mt-3">
+        <div className="col-6">
+          {props.dateToDefine === "startDate" ? <p>Début</p> : <p>Fin <br/><span style={{fontSize:'0.7em'}}>(optionnelle)</span></p>}
+        </div>
+        <div className="col-6 text-center">
           <TextField
             label="Heure"
             type="time"
@@ -67,8 +68,8 @@ const DayAndTimeSelection = (props) => {
             }}
             onChange={e => formatDate(false, e.target.value, props)}
           />
-        </td>
-      </tr>
+        </div>
+      </div>
     )
   }
   if(props.occurence === 'Every week') {
@@ -81,7 +82,7 @@ const DayAndTimeSelection = (props) => {
               Jour
             </InputLabel>
             <Select
-              // value='LUN'
+              value={props.command.startDate}
               onChange={e => formatDate(e.target.value, false, props)}
               input={<Input className="select-label" />}
             >

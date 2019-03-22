@@ -1,31 +1,29 @@
-import React from "react"
-// import { Link } from "gatsby"
+import React from "react";
+import {Redirect} from '@reach/router';
 
 import Layout from "../components/layout"
 import SEO from "../components/seo"
-import Switch from '../components/Switch';
+import AppliancesList from "../components/appliances-list";
 
-import ApplianceContext from "../context/applianceContext";
-import LoginContext from "../context/loginContext";
-import { Redirect } from "@reach/router";
-// import LoginContext from "../context/loginContext";
+import ApplianceContext from "../context/appliance-context";
+import LoginContext from "../context/login-context";
 
-const StoresPage = () => (
-  <LoginContext.Consumer>
-    {
-      value => value.isLogged
-      ?
-        <Layout>
-          <SEO title="Stores" />
-          <p style={{ margin: '2vh 0', textAlign: 'center', fontWeight: 'bold' }}>VOLETS</p>
+const StoresPage = () => {
+  return(
+    <LoginContext.Consumer>
+      {
+        value => value.isLogged ?
+        <Layout >
+          <SEO title="Lights" />
           <ApplianceContext.Consumer>
-            {value => value.stores.map((store, index) => <Switch appliance={store} index={index} />)}
+            {value => <AppliancesList appliances={value.stores} />}
           </ApplianceContext.Consumer>
         </Layout>
-      :
+        :
         <Redirect to="/" />
-    }
-  </LoginContext.Consumer>
-)
+      }
+    </LoginContext.Consumer>
+  )
+}
 
-export default StoresPage
+export default StoresPage;

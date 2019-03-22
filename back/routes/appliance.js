@@ -1,6 +1,6 @@
 const express = require('express')
 const router = express.Router()
-const Appliance = require('../models/applianceModel')
+const Appliance = require('../models/appliance-model')
 
 router.get('/', function (req, res, next) {
   Appliance.find({}).then((data, err) => {

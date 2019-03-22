@@ -4,11 +4,11 @@ import {Redirect} from '@reach/router';
 
 import Layout from "../components/layout"
 import SEO from "../components/seo"
-import Agenda from '../components/planningComponents/Agenda';
+import Agenda from '../components/agenda';
 
-import CommandContext from "../context/commandContext";
-import LoginContext from "../context/loginContext";
-import ApplianceContext from "../context/applianceContext";
+import CommandContext from "../context/command-context";
+import LoginContext from "../context/login-context";
+import ApplianceContext from "../context/appliance-context";
 
 const PlanningPage = () => {
   return(
@@ -22,7 +22,7 @@ const PlanningPage = () => {
             {appliances =>
               <CommandContext.Consumer>
                 {
-                  value => 
+                  value =>
                   <Agenda
                     appliances={appliances}
                     commands={value.commands}

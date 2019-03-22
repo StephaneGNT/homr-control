@@ -1,6 +1,6 @@
 const express = require('express')
 const router = express.Router()
-const Program = require('../models/commandModel')
+const Program = require('../models/program-model')
 
 router.get('/', function (req, res, next) {
   Program.find({}).then((data, err) => {
@@ -31,7 +31,6 @@ router.delete('/:id', function (req, res, next) {
 })
 
 router.put('/:id', function (req, res, next) {
-  console.log(req.body)
   Program.findByIdAndUpdate(req.params.id, req.body).then((data, err) => {
     if (err) res.status(500).json({message: 'Erreur lors de la mise à jour'})
     else res.status(200).send(data)
